@@ -1,7 +1,7 @@
 function FormTodo() {
   return (
     <>
-      <form>
+      <form >
         <div className="grid sm:grid-cols-4 gap-2 sm:gap-4 py-4 px-[6px] m-3">
           <div className="relative w-full sm:col-span-3 gap-x-3">
               <input 

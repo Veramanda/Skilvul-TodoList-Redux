@@ -96,6 +96,32 @@ function FormTodo() {
           Completed
         </button>
       </div>
+
+      {todos
+        .map((item) => (
+          <div key={item.id} className="p-2 border-b-2 border-black bg-cyan-300 m-4">
+            {editId === item.id ? (
+              <div>
+                <input className="scale-[1.3] cursor-pointer pr-5" onChange={() => handleCheckbox(item.id)} checked={item.isDone} type="checkbox" />
+                <input className="bg-cyan-300 outline-none " type="text" value={editTitle} onChange={handleInputEdit} />
+                <button className="justify-items-end px-2 py-[4px]  bg-cyan-500 text-white rounded-md font-semibold" onClick={updateTodo}>
+                  Update
+                </button>
+              </div>
+            ) : (
+              <div className="flex justify-between">
+                <div className="flex justify-between px-1">
+                  <input className="pl-2 scale-[1.3] cursor-pointer" onChange={() => handleCheckbox(item.id)} checked={item.isDone} type="checkbox" />
+                  <p className="pl-5 font-serif" style={item.isDone===true?{textDecoration:"line-through"}:{textDecoration:'none'}}>{item.title} </p>
+                </div>
+                <div className="flex justify-end">
+                  <span className="pr-2 cursor-pointer" onClick={() => handleEdit(item)}>✏️</span>
+                  <span className="cursor-pointer" onClick={() => handleDelete(item.id)}>❌</span>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
     </>
   );
 }

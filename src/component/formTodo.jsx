@@ -98,15 +98,28 @@ function FormTodo() {
       </div>
 
       {todos
+      .filter((item) => {
+        if (filter === 'INCOMPLETE') {
+          return !item.isDone;
+        } else if (filter == 'COMPLETED') {
+          return item.isDone;
+        } else {
+          return true;
+        }
+      })
         .map((item) => (
           <div key={item.id} className="p-2 border-b-2 border-black bg-cyan-300 m-4">
             {editId === item.id ? (
-              <div>
-                <input className="scale-[1.3] cursor-pointer pr-5" onChange={() => handleCheckbox(item.id)} checked={item.isDone} type="checkbox" />
-                <input className="bg-cyan-300 outline-none " type="text" value={editTitle} onChange={handleInputEdit} />
-                <button className="justify-items-end px-2 py-[4px]  bg-cyan-500 text-white rounded-md font-semibold" onClick={updateTodo}>
-                  Update
-                </button>
+              <div className="flex justify-between">
+                <div className="flex justify-between px-1">
+                  <input className="scale-[1.3] cursor-pointer pr-5" onChange={() => handleCheckbox(item.id)} checked={item.isDone} type="checkbox" />
+                  <input className="bg-cyan-300 ml-4 pl-1 font-serif border-2 border-black" style={{ cursor: 'pointer' }} type="text" value={editTitle} onChange={handleInputEdit}></input>
+                </div>
+                <div className="flex justify-end">
+                  <button className="justify-items-end px-2 py-[4px]  bg-cyan-500 text-white rounded-md font-semibold" onClick={updateTodo}>
+                    Update
+                  </button>
+                </div>
               </div>
             ) : (
               <div className="flex justify-between">
